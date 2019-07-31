@@ -1,0 +1,77 @@
+<div class="container-fluid">
+  <h2>complex-query</h2>
+  <div class="row">
+    <div class="col-8">
+      <form [formGroup]="querySelectionForm" novalidate (ngSubmit)="onSubmitted($event, querySelectionForm.value)">
+
+        <div class="form-group">
+          <label for="companies">Companies</label>
+          <angular2-multiselect #companiesEle formControlName="companies" class="form-control" id="companies"
+            aria-describedby="companiesHelp" placeholder="Enter companies" [data]="filteredMasterData.companies"
+            [settings]="settings" 
+            appApplyCancel
+            (appApplyCancelSelectionChanged)="onApplyCancelSelectionChanged('companies', $event)">
+          </angular2-multiselect>
+
+          <small id="companiesHelp" class="form-text text-muted">Select companies to search.</small>
+        </div>
+
+        <div class="form-group">
+          <label for="divisions">Divisions</label>
+          <angular2-multiselect keyValue #divisionsEle formControlName="divisions" class="form-control" id="divisions"
+            aria-describedby="divisionsHelp" placeholder="Enter divisions" [data]="filteredMasterData.divisions"
+            [settings]="settings" (onSelect)="onItemSelect('divisions', $event)"
+            (onDeSelect)="OnItemDeSelect('divisions', $event)" (onSelectAll)="onSelectAll('divisions', $event)"
+            (onDeSelectAll)="onDeSelectAll('divisions', $event)" (onOpen)="onOpen('divisions', $event)"
+            (onClose)="onClose('divisions', $event)">
+          </angular2-multiselect>
+
+          <small id="divisionsHelp" class="form-text text-muted">Select divisions to search.</small>
+        </div>
+
+        <div class="form-group">
+          <label for="industries">Industries</label>
+          <angular2-multiselect #industriesEle formControlName="industries" class="form-control" id="industries"
+            aria-describedby="industriesHelp" placeholder="Enter industries" [data]="filteredMasterData.industries"
+            [settings]="settings" (onSelect)="onItemSelect('industries', $event)"
+            (onDeSelect)="OnItemDeSelect('industries', $event)" (onSelectAll)="onSelectAll('industries', $event)"
+            (onDeSelectAll)="onDeSelectAll('industries', $event)" (onOpen)="onOpen('industries', $event)"
+            (onClose)="onClose('industries', $event)">
+          </angular2-multiselect>
+
+          <small id="industriesHelp" class="form-text text-muted">Select industries to search.</small>
+        </div>
+
+        <div class="form-group">
+          <label for="cities">Cities</label>
+          <angular2-multiselect #citiesEle formControlName="cities" class="form-control" id="cities"
+            aria-describedby="citiesHelp" placeholder="Enter cities" [data]="filteredMasterData.cities"
+            [settings]="settings" (onSelect)="onItemSelect('cities', $event)"
+            (onDeSelect)="OnItemDeSelect('cities', $event)" (onSelectAll)="onSelectAll('cities', $event)"
+            (onDeSelectAll)="onDeSelectAll('cities', $event)" (onOpen)="onOpen('cities', $event)"
+            (onClose)="onClose('cities', $event)">
+          </angular2-multiselect>
+
+          <small id="citiesHelp" class="form-text text-muted">Select cities to search.</small>
+        </div>
+
+        <button [disabled]="querySelectionForm.invalid" type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+    <div class="col">
+      <pre>
+Value
+------ 
+{{ querySelectionForm.value | json}}
+    </pre>
+
+      <pre>
+Errors
+------ 
+Form: {{ querySelectionForm.errors | json }}
+companies: {{ companies.errors | json }}
+      </pre>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,58 @@
+<div class="container-fluid">
+
+  <h2>simple-form</h2>
+
+  <div class="row">
+    <div class="col-8">
+      <form [formGroup]="userForm" novalidate (ngSubmit)="onSubmit($event, userForm.value)">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="name" formControlName="name" class="form-control" id="name" aria-describedby="nameHelp"
+            placeholder="Enter name" required>
+          <small id="nameHelp" class="form-text text-muted">What is your name.</small>
+        </div>
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <input type="email" formControlName="email" class="form-control" id="email" aria-describedby="emailHelp"
+            placeholder="Enter email" required>
+          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <div class="form-group">
+          <label for="skills">Email address</label>
+          <angular2-multiselect #skillsEle formControlName="skills" required class="form-control" id="skills"
+            aria-describedby="skillsHelp" placeholder="Enter skills" [data]="itemList" [settings]="settings"
+            (onSelect)="onItemSelect($event)" (onDeSelect)="OnItemDeSelect($event)" (onSelectAll)="onSelectAll($event)"
+            (onDeSelectAll)="onDeSelectAll($event)" (onOpen)="onOpen($event)" (onClose)="onClose($event)">
+          </angular2-multiselect>
+
+          <small id="skillsHelp" class="form-text text-muted">What skills do you posses. You can select multiple</small>
+        </div>
+        <div class="form-group form-check">
+          <input type="checkbox" formControlName="acceptTerms" class="form-check-input" id="acceptTerms" value="true" />
+          <label class="form-check-label" for="acceptTerms">Accept terms and conditions.*</label>
+        </div>
+        <button [disabled]="userForm.invalid" type="submit" class="btn btn-primary">Submit</button>
+      </form>
+
+
+    </div>
+    <div class="col">
+      <pre>
+  Value
+  ------ 
+  {{ userForm.value | json}}
+        </pre>
+
+      <pre>
+  Errors
+  ------ 
+  Form: {{ userForm.errors | json }}
+  name: {{ name.errors | json }}
+  email: {{ email.errors | json }}
+  skills: {{ skills.errors | json }}
+  acceptTerms: {{ acceptTerms.errors | json }}
+          </pre>
+
+    </div>
+  </div>
+</div>
